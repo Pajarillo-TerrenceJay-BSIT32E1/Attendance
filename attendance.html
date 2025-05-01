@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      font-family: sans-serif;
+    }
+
+    input {
+      padding: 10px;
+      font-size: 18px;
+      margin: 10px 0;
+    }
+
+    #result {
+      margin-top: 10px;
+      font-size: 18px;
+      color: #333;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      border: 1px solid black;
+      padding: 10px;
+      text-align: left;
+    }
+
+    thead th {
+      background-color: #F5EEDD;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin-top: 15px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    #searchInput {
+      margin-bottom: 10px;
+      padding: 8px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Employee Attendance</h1>
+
+  <!-- Search Input -->
+  <input type="text" id="searchInput" placeholder="Search by Employee ID" onkeyup="searchEmployee()" />
+  <button type="submit">Submit</button>
+
+  <!-- Attendance Table -->
+  <table>
+    <thead>
+      <tr>
+        <th>Employee ID</th>
+        <th>Employee Name</th>
+        <th>Department</th>
+        <th>Date</th>
+        <th>Time In</th>
+        <th>Time Out</th>
+      </tr>
+    </thead>
+    <tbody id="attendanceTable">
+      <tr>
+        <td>0001</td>
+        <td>Joshua Capilastique</td>
+        <td>IT</td>
+        <td>2025-04-29</td>
+        <td>08:00 AM</td>
+        <td>05:00 PM</td>
+      </tr>
+      <tr>
+        <td>0002</td>
+        <td>John Paul Rodrin</td>
+        <td>HR</td>
+        <td>2025-04-29</td>
+        <td>08:30 AM</td>
+        <td>05:30 PM</td>
+      </tr>
+      <tr>
+        <td>0003</td>
+        <td>Ginmer Estrella</td>
+        <td>accountant</td>
+        <td>2025-04-29</td>
+        <td>08:00 AM</td>
+        <td>05:00 PM</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <script>
+    function searchEmployee() {
+      const input = document.getElementById("searchInput").value.toUpperCase();
+      const table = document.getElementById("attendanceTable");
+      const tr = table.getElementsByTagName("tr");
+
+      for (let i = 0; i < tr.length; i++) {
+        const td = tr[i].getElementsByTagName("td")[0]; // Employee ID column
+        if (td) {
+          const txtValue = td.textContent || td.innerText;
+          tr[i].style.display = txtValue.toUpperCase().includes(input) ? "" : "none";
+        }
+      }
+    }
+  </script>
+
+</body>
+</html>

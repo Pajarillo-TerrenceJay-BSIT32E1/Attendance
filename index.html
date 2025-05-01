@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .top-nav {
+            background-color: black;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+        
+        .top-nav .logo {
+            height: 50px;
+            margin-right: 20px;
+            vertical-align: middle;
+        }
+        
+        .top-nav nav {
+            display: inline-block;
+        }
+        
+        .top-nav nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .top-nav nav ul li {
+            display: inline;
+            margin: 0 15px;
+            cursor: pointer;
+        }
+        
+        .top-nav nav ul li:hover {
+            text-decoration: underline;
+        }
+        
+        .main-content {
+            padding: 20px;
+            flex: 1;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header h1 {
+            margin: 0;
+        }
+        
+        #section-container {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Top Navigation Bar -->
+        <header class="top-nav">
+            <img src="1.png" alt="Event Horizon Logo" class="logo">
+            <nav>
+                <ul>
+                    <li onclick="loadSection('scanner.html')">Scanner</li>
+                    <li onclick="loadSection('attendance.html')">Attendance</li>
+                    <li onclick="loadSection('reports.html')">Reports</li>
+                </ul>
+            </nav>
+        </header>
+
+
+        <div id="section-container">
+            <h3>Welcome to the Attendance System</h3>
+            <p>Select a section from the top menu.</p>
+        </div>
+        </main>
+    </div>
+
+    <script>
+        // Load the Scanner section by default when the page is first opened
+        window.onload = function() {
+            loadSection('scanner.html');
+        }
+
+        function loadSection(page) {
+            fetch(page)
+                .then(res => res.text())
+                .then(html => {
+                    document.getElementById("section-container").innerHTML = html;
+                })
+                .catch(err => {
+                    document.getElementById("section-container").innerHTML = "<p>Error loading section.</p>";
+                    console.error("Section load failed:", err);
+                });
+        }
+
+        function closeSection() {
+            document.getElementById("section-container").innerHTML = ` 
+                <h3>Welcome to the RFID Attendance System</h3>
+                <p>Select a section from the top menu.</p>
+            `;
+        }
+    </script>
+</body>
+
+</html>
